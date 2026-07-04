@@ -1,4 +1,4 @@
-import * as SecureStore from "expo-secure-store";
+import { tokenStorage } from "../lib/tokenStorage";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import type { PropsWithChildren } from "react";
 import { api } from "../api/client";
@@ -30,13 +30,13 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   useEffect(() => {
     (async () => {
-      const stored = await SecureStore.getItemAsync(TOKEN_KEY);
+      const stored = await tokenStorage.get(TOKEN_KEY);
       if (stored) {
         try {
           await loadUser(stored);
           setToken(stored);
         } catch {
-          await SecureStore.deleteItemAsync(TOKEN_KEY);
+          await tokenStorage.remove(TOKEN_KEY);
         }
       }
       setIsLoading(false);
@@ -45,20 +45,20 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   const signup = useCallback(async (email: string, password: string) => {
     const result = await api.signup(email, password);
-    await SecureStore.setItemAsync(TOKEN_KEY, result.token);
+    await tokenStorage.set(TOKEN_KEY, result.token);
     setToken(result.token);
     setUser(result.user);
   }, []);
 
   const login = useCallback(async (email: string, password: string) => {
     const result = await api.login(email, password);
-    await SecureStore.setItemAsync(TOKEN_KEY, result.token);
+    await tokenStorage.set(TOKEN_KEY, result.token);
     setToken(result.token);
     setUser(result.user);
   }, []);
 
   const logout = useCallback(async () => {
-    await SecureStore.deleteItemAsync(TOKEN_KEY);
+    await tokenStorage.remove(TOKEN_KEY);
     setToken(null);
     setUser(null);
   }, []);
