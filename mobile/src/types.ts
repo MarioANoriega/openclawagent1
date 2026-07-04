@@ -9,14 +9,18 @@ export interface AuthedUser {
   subscriptionCurrentPeriodEnd?: number | null;
 }
 
+export type PetGender = "male" | "female" | "unknown";
+
 export interface Pet {
   id: string;
   name: string;
   species: string;
   breed: string | null;
+  gender: PetGender | null;
   ageYears: number | null;
   weightKg: number | null;
   notes: string | null;
+  photo: string | null;
   createdAt: number;
 }
 

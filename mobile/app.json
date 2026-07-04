@@ -17,6 +17,15 @@
     "android": {
       "package": "com.petplus.app"
     },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Pet Plus uses your photo library so you can set a profile picture for each pet.",
+          "cameraPermission": "Pet Plus uses your camera so you can take a profile picture for each pet."
+        }
+      ]
+    ],
     "extra": {
       "apiBaseUrl": "https://your-worker-subdomain.workers.dev"
     }

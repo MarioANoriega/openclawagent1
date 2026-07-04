@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { PrimaryButton } from "../components/PrimaryButton";
+import { PetAvatar } from "../components/PetAvatar";
 import { api } from "../api/client";
 import { useAuth } from "../context/AuthContext";
 import { hasActiveSubscription, type Pet } from "../types";
@@ -73,11 +74,24 @@ export function PetListScreen({ navigation }: Props) {
         }
         renderItem={({ item }) => (
           <Pressable style={styles.petCard} onPress={() => onPetPress(item)}>
-            <Text style={styles.petName}>{item.name}</Text>
-            <Text style={styles.petMeta}>
-              {item.species}
-              {item.breed ? ` · ${item.breed}` : ""}
-            </Text>
+            <PetAvatar name={item.name} photo={item.photo} size={52} />
+            <View style={styles.petInfo}>
+              <Text style={styles.petName}>{item.name}</Text>
+              <Text style={styles.petMeta}>
+                {[
+                  item.species,
+                  item.breed,
+                  item.gender && item.gender !== "unknown"
+                    ? item.gender === "male"
+                      ? "Male"
+                      : "Female"
+                    : null,
+                  item.ageYears != null ? `${item.ageYears} yr` : null,
+                ]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </Text>
+            </View>
           </Pressable>
         )}
       />
@@ -144,6 +158,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.border,
     marginBottom: spacing.sm,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.md,
+  },
+  petInfo: {
+    flex: 1,
   },
   petName: {
     fontSize: 17,

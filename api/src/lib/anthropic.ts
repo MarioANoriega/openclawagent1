@@ -8,6 +8,7 @@ function systemPromptForPet(pet: Pet): string {
   const details = [
     `Species: ${pet.species}`,
     pet.breed ? `Breed: ${pet.breed}` : null,
+    pet.gender && pet.gender !== "unknown" ? `Gender: ${pet.gender}` : null,
     pet.age_years != null ? `Age: ${pet.age_years} years` : null,
     pet.weight_kg != null ? `Weight: ${pet.weight_kg} kg` : null,
     pet.notes ? `Owner notes: ${pet.notes}` : null,

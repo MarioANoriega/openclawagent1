@@ -13,7 +13,9 @@ This repo is a monorepo with two workspaces:
 ## How it works
 
 1. A user signs up / logs in (email + password, JWT session).
-2. They add one or more pets (name, species, breed, age, weight, notes).
+2. They add one or more pets — profile photo, name, species, breed, gender,
+   age, weight, and notes. Photos are cropped square in the app, compressed,
+   and stored inline in D1 as data URIs (no extra storage service needed).
 3. They subscribe monthly or yearly via Stripe Checkout.
 4. Once subscribed, they get unlimited chat per pet. Each question is answered
    by Claude, using a system prompt tailored to that pet's profile, with a

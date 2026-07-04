@@ -26,15 +26,19 @@ export interface User {
   created_at: number;
 }
 
+export type PetGender = "male" | "female" | "unknown";
+
 export interface Pet {
   id: string;
   user_id: string;
   name: string;
   species: string;
   breed: string | null;
+  gender: PetGender | null;
   age_years: number | null;
   weight_kg: number | null;
   notes: string | null;
+  photo: string | null;
   created_at: number;
 }
 
