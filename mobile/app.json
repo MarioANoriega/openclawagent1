@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "Pet Plus",
+    "slug": "pet-plus",
+    "scheme": "petplus",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "backgroundColor": "#0F5132"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.petplus.app"
+    },
+    "android": {
+      "package": "com.petplus.app"
+    },
+    "extra": {
+      "apiBaseUrl": "https://your-worker-subdomain.workers.dev"
+    }
+  }
+}

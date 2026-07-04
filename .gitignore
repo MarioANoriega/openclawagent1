@@ -61,3 +61,16 @@ test/e2e/.dev.vars
 
 # npm config
 .npmrc
+
+# Expo / React Native
+mobile/.expo/
+mobile/dist/
+mobile/web-build/
+mobile/*.jks
+mobile/*.p8
+mobile/*.p12
+mobile/*.key
+mobile/*.mobileprovision
+mobile/*.orig.*
+mobile/ios/
+mobile/android/
