@@ -10,6 +10,11 @@ This repo is a monorepo with two workspaces:
 - **`api/`** — Cloudflare Worker backend (Hono + D1 + Stripe + Claude)
 - **`mobile/`** — Expo / React Native mobile app (iOS + Android)
 
+It also hosts a standalone, auto-updating **investment dashboard**
+(BlackRock, Berkshire Hathaway, indices, 13F tracker, hedge-fund strategy
+signals) in [`dashboard/`](dashboard/README.md), refreshed on a schedule by
+`.github/workflows/market-dashboard.yml` and served via GitHub Pages.
+
 ## How it works
 
 1. A user signs up / logs in (email + password, JWT session).

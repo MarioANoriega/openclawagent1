@@ -1,0 +1,65 @@
+name: Market dashboard — refresh data & deploy
+
+on:
+  schedule:
+    # Every 30 minutes during US market hours (13:00–21:30 UTC covers
+    # 9:30am–4pm ET across DST), Mon–Fri, plus one after-close snapshot.
+    - cron: "*/30 13-21 * * 1-5"
+    - cron: "15 22 * * 1-5"
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - "dashboard/**"
+      - "scripts/fetch_market_data.py"
+      - ".github/workflows/market-dashboard.yml"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: market-dashboard
+  cancel-in-progress: false
+
+jobs:
+  refresh-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Fetch fresh market data
+        # Only on schedule/manual runs — a plain push deploys whatever is committed.
+        if: github.event_name != 'push'
+        run: python3 scripts/fetch_market_data.py
+
+      - name: Commit updated data
+        if: github.event_name != 'push'
+        run: |
+          if git diff --quiet -- dashboard/data/market.json; then
+            echo "no data changes"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add dashboard/data/market.json
+            git commit -m "chore: refresh market data snapshot"
+            git push origin main
+          fi
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload dashboard
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dashboard
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
