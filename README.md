@@ -10,6 +10,11 @@ This repo is a monorepo with two workspaces:
 - **`api/`** — Cloudflare Worker backend (Hono + D1 + Stripe + Claude)
 - **`mobile/`** — Expo / React Native mobile app (iOS + Android)
 
+It also contains an unrelated standalone prototype:
+
+- **`sprout/`** — Sprout, a mobile investment-app frontend prototype
+  (Vite + React + Tailwind). See [`sprout/README.md`](sprout/README.md).
+
 ## How it works
 
 1. A user signs up / logs in (email + password, JWT session).
