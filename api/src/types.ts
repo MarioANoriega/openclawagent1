@@ -48,5 +48,6 @@ export interface ChatMessage {
   pet_id: string;
   role: "user" | "assistant";
   content: string;
+  vet_referral: number;
   created_at: number;
 }

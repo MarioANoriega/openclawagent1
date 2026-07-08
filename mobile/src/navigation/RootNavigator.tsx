@@ -9,6 +9,7 @@ import { AddPetScreen } from "../screens/AddPetScreen";
 import { ChatScreen } from "../screens/ChatScreen";
 import { SubscribeScreen } from "../screens/SubscribeScreen";
 import { AccountScreen } from "../screens/AccountScreen";
+import { FindVetScreen } from "../screens/FindVetScreen";
 import { colors } from "../theme";
 
 export type AuthStackParamList = {
@@ -22,6 +23,7 @@ export type AppStackParamList = {
   Chat: { petId: string; petName: string };
   Subscribe: undefined;
   Account: undefined;
+  FindVet: undefined;
 };
 
 const AuthStack = createNativeStackNavigator<AuthStackParamList>();
@@ -53,6 +55,11 @@ function AppNavigator() {
         options={{ title: "Subscribe" }}
       />
       <AppStack.Screen name="Account" component={AccountScreen} options={{ title: "Account" }} />
+      <AppStack.Screen
+        name="FindVet"
+        component={FindVetScreen}
+        options={{ title: "Find a vet" }}
+      />
     </AppStack.Navigator>
   );
 }

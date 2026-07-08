@@ -4,6 +4,7 @@ import { authRoutes } from "./routes/auth";
 import { petsRoutes } from "./routes/pets";
 import { chatRoutes } from "./routes/chat";
 import { billingRoutes } from "./routes/billing";
+import { vetsRoutes } from "./routes/vets";
 import { webhookRoutes } from "./routes/webhooks";
 import type { AuthVariables, Env } from "./types";
 
@@ -17,6 +18,7 @@ app.route("/api/auth", authRoutes);
 app.route("/api/pets", petsRoutes);
 app.route("/api/chat", chatRoutes);
 app.route("/api/billing", billingRoutes);
+app.route("/api/vets", vetsRoutes);
 app.route("/api/webhooks", webhookRoutes);
 
 export default app;

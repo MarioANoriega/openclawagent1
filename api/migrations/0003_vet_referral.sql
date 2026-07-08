@@ -1,0 +1,1 @@
+ALTER TABLE chat_messages ADD COLUMN vet_referral INTEGER NOT NULL DEFAULT 0;

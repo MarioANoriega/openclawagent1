@@ -1,5 +1,5 @@
 import { API_BASE_URL } from "../config";
-import type { AuthedUser, ChatMessage, Pet } from "../types";
+import type { AuthedUser, ChatMessage, Pet, VetSearchResult } from "../types";
 
 export class ApiError extends Error {
   status: number;
@@ -67,6 +67,21 @@ export const api = {
       `/api/chat/${petId}/messages`,
       { method: "POST", token, body: { message } },
     ),
+
+  searchVets: (
+    token: string,
+    params: { lat: number; lon: number } | { zip: string; country?: string },
+  ) => {
+    const query = new URLSearchParams();
+    if ("lat" in params) {
+      query.set("lat", String(params.lat));
+      query.set("lon", String(params.lon));
+    } else {
+      query.set("zip", params.zip);
+      if (params.country) query.set("country", params.country);
+    }
+    return request<VetSearchResult>(`/api/vets/search?${query}`, { token });
+  },
 
   createCheckout: (token: string, plan: "monthly" | "yearly") =>
     request<{ checkoutUrl: string }>("/api/billing/checkout", {

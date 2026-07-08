@@ -77,7 +77,9 @@ export function ChatScreen({ route, navigation }: Props) {
           ref={listRef}
           data={messages}
           keyExtractor={(message) => message.id}
-          renderItem={({ item }) => <ChatBubble message={item} />}
+          renderItem={({ item }) => (
+            <ChatBubble message={item} onFindVet={() => navigation.navigate("FindVet")} />
+          )}
           contentContainerStyle={styles.messages}
           onContentSizeChange={() => listRef.current?.scrollToEnd({ animated: true })}
           ListEmptyComponent={

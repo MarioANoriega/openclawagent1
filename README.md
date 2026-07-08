@@ -23,6 +23,12 @@ This repo is a monorepo with two workspaces:
    emergency care for urgent symptoms.
 5. Stripe webhooks keep subscription status in sync (active / past due /
    canceled), and the billing portal lets users manage or cancel their plan.
+6. When the assistant's answer advises seeing a veterinarian, the chat shows a
+   "Find a vet near you" card. The Find a Vet screen searches nearby clinics by
+   device location or ZIP/postal code + country, and lists each clinic's name,
+   address, distance, and Call / Email / Website / Map actions. Vet data comes
+   from OpenStreetMap (Nominatim geocoding + Overpass search) — free, no API
+   key. Vet search requires login but deliberately **not** a subscription.
 
 **Pet Plus is not a substitute for veterinary care.** The assistant is
 explicitly instructed to recommend contacting a vet for anything urgent,
@@ -46,6 +52,7 @@ for storage, [Stripe](https://stripe.com) for billing, and the
 | GET/PUT/DELETE | `/api/pets/:id` | Bearer | Read/update/delete a pet |
 | GET | `/api/chat/:petId/history` | Bearer | Chat history for a pet |
 | POST | `/api/chat/:petId/messages` | Bearer + active subscription | Ask the assistant a question |
+| GET | `/api/vets/search` | Bearer | Find nearby veterinarians (`?lat=&lon=` or `?zip=&country=`) |
 | POST | `/api/billing/checkout` | Bearer | Create a Stripe Checkout session (`{ plan: "monthly" \| "yearly" }`) |
 | POST | `/api/billing/portal` | Bearer | Create a Stripe Billing Portal session |
 | POST | `/api/webhooks/stripe` | Stripe signature | Subscription lifecycle events |

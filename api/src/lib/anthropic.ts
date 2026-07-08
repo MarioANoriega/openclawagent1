@@ -4,6 +4,16 @@ const ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages";
 const MODEL = "claude-sonnet-4-5";
 const MAX_TOKENS = 1024;
 
+export const VET_REFERRAL_MARKER = "[VET_REFERRAL]";
+
+export function extractVetReferral(text: string): { text: string; vetReferral: boolean } {
+  const vetReferral = text.includes(VET_REFERRAL_MARKER);
+  return {
+    text: text.split(VET_REFERRAL_MARKER).join("").trim(),
+    vetReferral,
+  };
+}
+
 function systemPromptForPet(pet: Pet): string {
   const details = [
     `Species: ${pet.species}`,
@@ -29,7 +39,9 @@ Guidelines:
 difficulty breathing, prolonged vomiting/diarrhea, suspected fractures, or any emergency), clearly advise contacting a vet or \
 emergency animal hospital immediately.
 - Include a brief reminder to consult a veterinarian for diagnosis or treatment decisions when discussing medical topics.
-- Keep answers concise and easy to read on a mobile screen.`;
+- Keep answers concise and easy to read on a mobile screen.
+- Whenever your answer advises seeing or contacting a veterinarian or emergency clinic, append the marker ${VET_REFERRAL_MARKER} \
+on its own final line. The app removes it and shows the owner a "find a vet near you" shortcut - never mention the marker itself.`;
 }
 
 export async function askPetAssistant(
@@ -37,7 +49,7 @@ export async function askPetAssistant(
   pet: Pet,
   history: ChatMessage[],
   question: string,
-): Promise<string> {
+): Promise<{ text: string; vetReferral: boolean }> {
   const messages = [
     ...history.map((m) => ({ role: m.role, content: m.content })),
     { role: "user" as const, content: question },
@@ -67,8 +79,10 @@ export async function askPetAssistant(
     content: { type: string; text?: string }[];
   };
 
-  return data.content
+  const raw = data.content
     .filter((block) => block.type === "text" && block.text)
     .map((block) => block.text)
     .join("\n");
+
+  return extractVetReferral(raw);
 }

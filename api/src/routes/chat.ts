@@ -18,6 +18,7 @@ function toMessageResponse(message: ChatMessage) {
     id: message.id,
     role: message.role,
     content: message.content,
+    vetReferral: message.vet_referral === 1,
     createdAt: message.created_at,
   };
 }
@@ -77,7 +78,7 @@ chatRoutes.post("/:petId/messages", async (c) => {
     .bind(userMessageId, user.id, pet.id, question, now)
     .run();
 
-  let answer: string;
+  let answer: { text: string; vetReferral: boolean };
   try {
     answer = await askPetAssistant(c.env.ANTHROPIC_API_KEY, pet, history, question);
   } catch (err) {
@@ -87,10 +88,10 @@ chatRoutes.post("/:petId/messages", async (c) => {
   const assistantMessageId = crypto.randomUUID();
   const assistantCreatedAt = Date.now();
   await c.env.DB.prepare(
-    `INSERT INTO chat_messages (id, user_id, pet_id, role, content, created_at)
-     VALUES (?, ?, ?, 'assistant', ?, ?)`,
+    `INSERT INTO chat_messages (id, user_id, pet_id, role, content, vet_referral, created_at)
+     VALUES (?, ?, ?, 'assistant', ?, ?, ?)`,
   )
-    .bind(assistantMessageId, user.id, pet.id, answer, assistantCreatedAt)
+    .bind(assistantMessageId, user.id, pet.id, answer.text, answer.vetReferral ? 1 : 0, assistantCreatedAt)
     .run();
 
   return c.json({
@@ -98,12 +99,14 @@ chatRoutes.post("/:petId/messages", async (c) => {
       id: userMessageId,
       role: "user",
       content: question,
+      vetReferral: false,
       createdAt: now,
     },
     assistantMessage: {
       id: assistantMessageId,
       role: "assistant",
-      content: answer,
+      content: answer.text,
+      vetReferral: answer.vetReferral,
       createdAt: assistantCreatedAt,
     },
   });

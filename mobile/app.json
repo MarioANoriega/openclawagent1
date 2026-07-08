@@ -24,6 +24,12 @@
           "photosPermission": "Pet Plus uses your photo library so you can set a profile picture for each pet.",
           "cameraPermission": "Pet Plus uses your camera so you can take a profile picture for each pet."
         }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Pet Plus uses your location to find veterinarians near you."
+        }
       ]
     ],
     "extra": {

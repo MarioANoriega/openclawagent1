@@ -28,7 +28,26 @@ export interface ChatMessage {
   id: string;
   role: "user" | "assistant";
   content: string;
+  vetReferral?: boolean;
   createdAt: number;
+}
+
+export interface Vet {
+  id: string;
+  name: string;
+  lat: number;
+  lon: number;
+  distanceKm: number;
+  address: string | null;
+  phone: string | null;
+  email: string | null;
+  website: string | null;
+}
+
+export interface VetSearchResult {
+  origin: { lat: number; lon: number; label: string };
+  radiusKm: number;
+  vets: Vet[];
 }
 
 export function hasActiveSubscription(user: AuthedUser | null): boolean {

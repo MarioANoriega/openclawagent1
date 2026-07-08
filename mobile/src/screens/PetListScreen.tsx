@@ -50,9 +50,14 @@ export function PetListScreen({ navigation }: Props) {
     <SafeAreaView style={styles.container} edges={["top"]}>
       <View style={styles.header}>
         <Text style={styles.title}>Your pets</Text>
-        <Pressable onPress={() => navigation.navigate("Account")}>
-          <Text style={styles.accountLink}>Account</Text>
-        </Pressable>
+        <View style={styles.headerLinks}>
+          <Pressable onPress={() => navigation.navigate("FindVet")}>
+            <Text style={styles.accountLink}>Find a vet</Text>
+          </Pressable>
+          <Pressable onPress={() => navigation.navigate("Account")}>
+            <Text style={styles.accountLink}>Account</Text>
+          </Pressable>
+        </View>
       </View>
 
       {!subscribed && (
@@ -119,6 +124,10 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: "700",
     color: colors.text,
+  },
+  headerLinks: {
+    flexDirection: "row",
+    gap: spacing.md,
   },
   accountLink: {
     color: colors.primary,
