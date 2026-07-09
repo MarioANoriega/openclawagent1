@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { Scan } from "@/lib/types";
 import SignalChart, { CHANNELS } from "@/components/SignalChart";
 
-const DEMO_KEY = "sk_demo_sapient";
+const DEMO_KEY = "sk_demo_neuralytics";
 
 const SAMPLES = [
   "https://cdn.example.com/spring-launch-hook-a.mp4",
@@ -84,10 +84,9 @@ export default function Dashboard() {
     <div>
       <div style={{ borderBottom: "1px solid var(--line-soft)", padding: "16px 0" }}>
         <div className="container row" style={{ justifyContent: "space-between" }}>
-          <Link href="/" className="logo" aria-label="the sapient company">
-            <span className="t1">the</span>
-            <span className="t2">sapient</span>
-            <span className="t3">company</span>
+          <Link href="/" className="logo" aria-label="Neuralytics">
+            <span className="t2">Neuralytics</span>
+            <span className="t3">the analytics of attention</span>
           </Link>
           <span className="pill">demo dashboard · key {DEMO_KEY}</span>
         </div>
@@ -99,7 +98,7 @@ export default function Dashboard() {
         </div>
         <h2 className="dash-h2" style={{ marginBottom: 10 }}>Drop in an ad or video URL.</h2>
         <p className="muted" style={{ marginTop: 0 }}>
-          Paste a link and Sapient returns a per-second neural read. (This demo
+          Paste a link and Neuralytics returns a per-second neural read. (This demo
           scores a deterministic proxy model — same input, same read.)
         </p>
 

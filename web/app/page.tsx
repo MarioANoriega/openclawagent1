@@ -1,17 +1,17 @@
 import Link from "next/link";
 import BrainViz from "@/components/BrainViz";
 
-// Landing page — a faithful replica of thesapientcompany.com, matched to the
+// Landing page — Neuralytics, a neuromarketing scan product (rebranded from the
+// thesapientcompany.com reference design), matched to the
 // reference screenshot: light warm editorial layout, two-tone grotesk
 // headlines, mono eyebrows in outlined pills, charcoal pill buttons, a dark
 // "TOTAL DECODE" section, and fMRI data panels.
 
 function Logo() {
   return (
-    <Link href="/" className="logo" aria-label="the sapient company">
-      <span className="t1">the</span>
-      <span className="t2">sapient</span>
-      <span className="t3">company</span>
+    <Link href="/" className="logo" aria-label="Neuralytics">
+      <span className="t2">Neuralytics</span>
+      <span className="t3">the analytics of attention</span>
     </Link>
   );
 }
@@ -393,7 +393,7 @@ function Pricing() {
       </p>
 
       <div className="price-hero">
-        <div className="fm">Sapient<b>Founding Member</b></div>
+        <div className="fm">Neuralytics<b>Founding Member</b></div>
         <div className="amt">$29<span className="per">/month</span></div>
         <div className="fine">No hidden fees. Cancel anytime.</div>
       </div>
@@ -420,13 +420,13 @@ function QuickInstall() {
   return (
     <section className="container">
       <div className="eyebrow-wrap"><span className="eyebrow">Quick install</span></div>
-      <h2>Add Sapient to <span className="dim">your coding agent</span></h2>
-      <p className="section-lead lead">Connect Sapient to any MCP-capable agent in one command.</p>
+      <h2>Add Neuralytics to <span className="dim">your coding agent</span></h2>
+      <p className="section-lead lead">Connect Neuralytics to any MCP-capable agent in one command.</p>
 
       <div className="codecard" style={{ marginBottom: 8 }}>
         <div className="kick">TERMINAL<b>INSTALL</b></div>
         <div className="copybar" style={{ marginTop: 16 }}>
-          <span><span className="p" style={{ color: "#8b9694" }}>$</span> npx -y @thesapientcompany/mcp</span>
+          <span><span className="p" style={{ color: "#8b9694" }}>$</span> npx -y @neuralytics/mcp</span>
           <button className="cp">COPY</button>
         </div>
         <p className="mono" style={{ fontSize: 12, color: "var(--faint)", marginTop: 12 }}>No key needed to try the demo.</p>
@@ -453,7 +453,7 @@ function QuickInstall() {
         <div className="codecard">
           <div className="kick">ACCESS<b>YOUR API KEY</b></div>
           <div className="copybar light" style={{ marginTop: 16 }}>
-            <span>SAPIENT_API_KEY=sk_live_••••••••</span>
+            <span>NEURALYTICS_API_KEY=sk_live_••••••••</span>
           </div>
         </div>
       </div>
@@ -466,7 +466,7 @@ function QuickInstall() {
       <div className="center" style={{ marginTop: 20 }}>
         <div className="eyebrow-wrap"><span className="eyebrow">One-command install</span></div>
         <div className="copybar light" style={{ maxWidth: 640, margin: "0 auto" }}>
-          <span>$ npx -y @thesapientcompany/mcp</span>
+          <span>$ npx -y @neuralytics/mcp</span>
           <button className="cp">COPY</button>
         </div>
         <p className="lead" style={{ margin: "16px 0 22px" }}>No account needed to try it — add a key to scan your own.</p>
@@ -479,8 +479,8 @@ function QuickInstall() {
 function Footer() {
   return (
     <footer className="container">
-      <div className="foot-brand-top">THE SAPIENT COMPANY/</div>
-      <a className="foot-mail" href="mailto:support@thesapientcompany.com">support@thesapientcompany.com</a>
+      <div className="foot-brand-top">NEURALYTICS/</div>
+      <a className="foot-mail" href="mailto:support@neuralytics.ai">support@neuralytics.ai</a>
       <div className="foot-brand-top">DISCLAIMER /</div>
       <p className="foot-discl">
         All brain data comes from de-identified, non-identifiable research
@@ -504,7 +504,7 @@ function Footer() {
           <a href="#">Instagram</a>
         </div>
       </div>
-      <div className="wordmark">SAPIENT</div>
+      <div className="wordmark">NEURALYTICS</div>
     </footer>
   );
 }

@@ -6,12 +6,12 @@ export const dynamic = "force-dynamic";
 // Demo API key. In a real deployment this is per-user and checked against a DB;
 // here any non-empty Bearer token (or the demo key) is accepted so the flow is
 // exercisable end to end.
-const DEMO_KEY = "sk_demo_sapient";
+const DEMO_KEY = "sk_demo_neuralytics";
 
 function authorized(req: NextRequest): boolean {
   const auth = req.headers.get("authorization") ?? "";
   const token = auth.replace(/^Bearer\s+/i, "").trim();
-  return token.length > 0; // accept any key in the demo, incl. sk_demo_sapient
+  return token.length > 0; // accept any key in the demo, incl. sk_demo_neuralytics
 }
 
 // POST /v1/scans  — create a scan from a video URL (or a file reference).
