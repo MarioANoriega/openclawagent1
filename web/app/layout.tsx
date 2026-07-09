@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Sapient — Decode what humans think",
+  title: "the sapient company — Decode what humans think, then control it.",
   description:
-    "A model trained on real fMRI brain data reads any ad or video second by second — attention, emotion, memory, and intent — and marks the exact moment the brain decides to buy.",
+    "We tell you how real human brains interpret ads and content so you can optimize for whatever result you want from any human. A model trained on real fMRI brain data reads your creative second by second.",
 };
 
 export default function RootLayout({

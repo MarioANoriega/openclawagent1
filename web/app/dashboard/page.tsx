@@ -81,19 +81,23 @@ export default function Dashboard() {
   const e = scan?.events;
 
   return (
-    <div className="dash-wrap">
-      <div className="dash-head">
+    <div>
+      <div style={{ borderBottom: "1px solid var(--line-soft)", padding: "16px 0" }}>
         <div className="container row" style={{ justifyContent: "space-between" }}>
-          <Link href="/" className="brand">
-            <span className="brand-dot" /> Sapient
+          <Link href="/" className="logo" aria-label="the sapient company">
+            <span className="t1">the</span>
+            <span className="t2">sapient</span>
+            <span className="t3">company</span>
           </Link>
           <span className="pill">demo dashboard · key {DEMO_KEY}</span>
         </div>
       </div>
 
-      <div className="container" style={{ padding: "40px 24px 80px" }}>
-        <div className="eyebrow">New scan</div>
-        <h2 style={{ marginBottom: 10 }}>Drop in an ad or video URL.</h2>
+      <div className="container" style={{ padding: "40px 22px 80px" }}>
+        <div className="eyebrow-wrap" style={{ justifyContent: "flex-start" }}>
+          <span className="eyebrow">New scan</span>
+        </div>
+        <h2 className="dash-h2" style={{ marginBottom: 10 }}>Drop in an ad or video URL.</h2>
         <p className="muted" style={{ marginTop: 0 }}>
           Paste a link and Sapient returns a per-second neural read. (This demo
           scores a deterministic proxy model — same input, same read.)
