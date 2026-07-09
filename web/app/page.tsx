@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AnthropicLogo, OpenAILogo, CursorLogo, WindsurfLogo } from "@/components/AgentLogos";
 
 // Landing page — Neuralytics, a neuromarketing scan product (rebranded from the
 // thesapientcompany.com reference design), matched to the
@@ -445,9 +446,10 @@ function QuickInstall() {
           <div className="mono" style={{ fontSize: 11, letterSpacing: "0.14em", color: "var(--faint)" }}>AGENTS</div>
           <div className="mono" style={{ fontWeight: 600, letterSpacing: "0.08em", marginBottom: 12 }}>WORKS WITH</div>
           <div className="agents">
-            {[["◣","CLAUDE CODE"],["✳","CODEX"],["◆","CURSOR"],["ᗐ","WINDSURF"]].map(([g, n]) => (
-              <div className="a" key={n}><div className="g">{g}</div><div className="n">{n}</div></div>
-            ))}
+            <div className="a"><div className="g"><AnthropicLogo /></div><div className="n">CLAUDE CODE</div></div>
+            <div className="a"><div className="g"><OpenAILogo /></div><div className="n">CODEX</div></div>
+            <div className="a"><div className="g"><CursorLogo /></div><div className="n">CURSOR</div></div>
+            <div className="a"><div className="g"><WindsurfLogo /></div><div className="n">WINDSURF</div></div>
           </div>
           <div className="agentnote">One MCP server. Every agent gets scan, score, and readout tools.</div>
         </div>
