@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 import type { Scan } from "@/lib/types";
 import SignalChart, { CHANNELS } from "@/components/SignalChart";
 
@@ -12,6 +13,30 @@ const SAMPLES = [
   "https://cdn.example.com/spring-launch-hook-b.mp4",
   "https://cdn.example.com/testimonial-30s.mp4",
 ];
+
+function SessionBadge() {
+  const { data: session } = useSession();
+  if (!session?.user) {
+    return (
+      <div className="row" style={{ gap: 10 }}>
+        <span className="pill">demo mode · key {DEMO_KEY}</span>
+        <Link href="/login" className="btn btn-outline btn-sm">Log in</Link>
+      </div>
+    );
+  }
+  return (
+    <div className="row" style={{ gap: 10 }}>
+      <span className="pill">{session.user.email}</span>
+      <button
+        className="btn btn-outline btn-sm"
+        onClick={() => signOut({ callbackUrl: "/" })}
+        style={{ cursor: "pointer" }}
+      >
+        Sign out
+      </button>
+    </div>
+  );
+}
 
 export default function Dashboard() {
   const [url, setUrl] = useState("");
@@ -88,7 +113,7 @@ export default function Dashboard() {
             <span className="t2">Neuralytics</span>
             <span className="t3">the analytics of attention</span>
           </Link>
-          <span className="pill">demo dashboard · key {DEMO_KEY}</span>
+          <SessionBadge />
         </div>
       </div>
 

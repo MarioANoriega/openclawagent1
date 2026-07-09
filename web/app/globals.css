@@ -312,6 +312,13 @@ footer { border-top: 1px solid var(--line); padding: 70px 0 0; }
   margin-top: 16px; font-family: var(--mono); font-size: 11.5px; color: var(--green);
 }
 
+/* ---------- Legal pages ---------- */
+.legal-body h2 {
+  font-size: 22px; text-align: left; margin: 36px 0 10px; letter-spacing: -0.02em;
+}
+.legal-body p, .legal-body li { color: var(--muted); font-size: 15.5px; line-height: 1.65; }
+.legal-body ul { padding-left: 22px; }
+
 /* Dashboard compatibility utilities */
 .muted { color: var(--muted); }
 .faint { color: var(--faint); }

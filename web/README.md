@@ -32,6 +32,19 @@ npm run dev      # http://localhost:3000
 
 `npm run build` and `npm run typecheck` both pass.
 
+## Auth
+
+NextAuth is wired at `/api/auth` (config in `lib/auth.ts`):
+
+- **Email (demo)** — works out of the box: any well-formed email signs in and
+  gets a real JWT session. The dashboard header shows the user + Sign out.
+- **Google / Apple** — activate automatically when their env vars exist
+  (`GOOGLE_CLIENT_ID`/`_SECRET`, `APPLE_CLIENT_ID`/`_SECRET` — see
+  `.env.example`, including the redirect URIs to register). Until configured,
+  the buttons explain what's missing instead of dead-ending.
+- Pages: `/login`, `/signup`, plus `/privacy` and `/terms` linked from the
+  consent line. Set `NEXTAUTH_URL` + `NEXTAUTH_SECRET` in production.
+
 ## API
 
 Classic async-job pattern, mirroring the original's documented behavior.

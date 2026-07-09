@@ -3,17 +3,26 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { AuthNav, ProviderButtons, LegalLine } from "@/components/AuthShared";
+import { AuthNav, ProviderButtons, LegalLine, emailSignIn } from "@/components/AuthShared";
 
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
 
-  const submit = (ev: React.FormEvent) => {
+  const submit = async (ev: React.FormEvent) => {
     ev.preventDefault();
-    if (!email.trim()) return;
-    // Demo: no real auth backend — land on the dashboard.
-    router.push("/dashboard");
+    if (!email.trim() || busy) return;
+    setBusy(true);
+    setError(null);
+    const err = await emailSignIn(email);
+    if (err) {
+      setError(err);
+      setBusy(false);
+    } else {
+      router.push("/dashboard");
+    }
   };
 
   return (
@@ -41,9 +50,17 @@ export default function LoginPage() {
                 required
               />
             </div>
-            <button type="submit" className="btn btn-dark" style={{ width: "100%" }}>
-              Log in with email
+            <button
+              type="submit"
+              className="btn btn-dark"
+              style={{ width: "100%", opacity: busy ? 0.6 : 1 }}
+              disabled={busy}
+            >
+              {busy ? "Logging in…" : "Log in with email"}
             </button>
+            {error && (
+              <p style={{ fontSize: 13, color: "var(--orange)", marginTop: 10 }}>{error}</p>
+            )}
           </form>
 
           <p className="auth-switch">

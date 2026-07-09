@@ -1,11 +1,13 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
-// Shared pieces for the /login and /signup pages. This is a demo auth flow:
-// no real OAuth is wired up — every path lands on the dashboard. Swap the
-// handlers for NextAuth/Supabase/etc. signIn calls in a real deployment.
+// Shared pieces for the /login and /signup pages, wired to NextAuth.
+// Google/Apple buttons trigger real OAuth when the provider is configured
+// (GOOGLE_CLIENT_ID / APPLE_CLIENT_ID env vars — see .env.example); until
+// then they explain what's missing instead of dead-ending.
 
 export function AuthNav() {
   return (
@@ -43,26 +45,60 @@ function AppleIcon() {
 }
 
 export function ProviderButtons({ verb }: { verb: string }) {
-  const router = useRouter();
-  // Demo: providers aren't wired to real OAuth — everything lands on /dashboard.
-  const go = () => router.push("/dashboard");
+  // Which OAuth providers the server actually has credentials for.
+  const [available, setAvailable] = useState<Record<string, boolean>>({});
+  const [notice, setNotice] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch("/api/auth/providers")
+      .then((r) => (r.ok ? r.json() : {}))
+      .then((p: Record<string, unknown>) =>
+        setAvailable({ google: "google" in p, apple: "apple" in p })
+      )
+      .catch(() => setAvailable({}));
+  }, []);
+
+  const oauth = (provider: "google" | "apple", label: string) => {
+    if (available[provider]) {
+      signIn(provider, { callbackUrl: "/dashboard" });
+    } else {
+      setNotice(
+        `${label} sign-in isn't configured yet — add the ${provider.toUpperCase()}_CLIENT_ID / _SECRET env vars (see .env.example). Use email below meanwhile.`
+      );
+    }
+  };
+
   return (
     <div className="auth-btns">
-      <button className="auth-btn" onClick={go}>
+      <button className="auth-btn" onClick={() => oauth("google", "Google")}>
         <GoogleIcon /> {verb} with Google
       </button>
-      <button className="auth-btn apple" onClick={go}>
+      <button className="auth-btn apple" onClick={() => oauth("apple", "Apple")}>
         <AppleIcon /> {verb} with Apple
       </button>
+      {notice && (
+        <p style={{ fontSize: 13, color: "var(--orange)", margin: "4px 0 0" }}>{notice}</p>
+      )}
     </div>
   );
+}
+
+// Signs in with the demo email provider and lands on the dashboard.
+export async function emailSignIn(email: string): Promise<string | null> {
+  const res = await signIn("demo-email", {
+    email,
+    redirect: false,
+    callbackUrl: "/dashboard",
+  });
+  if (res?.error) return "That email didn't work — check the format and try again.";
+  return null;
 }
 
 export function LegalLine() {
   return (
     <p className="auth-legal">
       By continuing, you agree to the{" "}
-      <a href="#">Privacy Policy</a> &amp; <a href="#">Terms</a>
+      <Link href="/privacy">Privacy Policy</Link> &amp; <Link href="/terms">Terms</Link>
     </p>
   );
 }
