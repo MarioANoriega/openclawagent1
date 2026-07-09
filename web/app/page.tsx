@@ -40,9 +40,9 @@ function Hero() {
   return (
     <header className="hero container">
       <h1>
-        Decode what humans think,
+        Decode what people feel
         <br />
-        <span className="dim">then control it.</span>
+        <span className="dim">— before they say a word</span>
       </h1>
       <p className="lead">
         We tell you how real human brains interpret ads and content so you can
