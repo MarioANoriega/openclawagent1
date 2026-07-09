@@ -45,8 +45,9 @@ function Hero() {
         <span className="dim">— before they say a word</span>
       </h1>
       <p className="lead">
-        We tell you how real human brains interpret ads and content so you can
-        optimize for whatever result you want from any human.
+        See what your audience feels before they can put it into words. We
+        reveal how real brains experience your content, so you can design for
+        genuine impact — not just clicks.
       </p>
       <Link href="/dashboard" className="btn btn-dark">
         Run first scan
