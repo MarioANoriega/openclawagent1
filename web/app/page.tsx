@@ -1,5 +1,4 @@
 import Link from "next/link";
-import BrainViz from "@/components/BrainViz";
 
 // Landing page — Neuralytics, a neuromarketing scan product (rebranded from the
 // thesapientcompany.com reference design), matched to the
@@ -49,7 +48,10 @@ function Hero() {
       <Link href="/dashboard" className="btn btn-dark">
         Run first scan
       </Link>
-      <BrainViz />
+      <div className="hero-brain-wrap">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="hero-brain-img" src="/brain.jpg" alt="Sagittal fMRI brain scan" />
+      </div>
     </header>
   );
 }

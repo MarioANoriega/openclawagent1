@@ -97,9 +97,16 @@ h3 { font-size: clamp(26px, 4vw, 36px); letter-spacing: -0.03em; margin: 0 0 14p
 .hero { padding: 40px 0 40px; text-align: center; }
 .hero h1 { max-width: 15ch; margin: 0 auto 26px; }
 .hero .lead { max-width: 620px; margin: 0 auto 40px; }
-.hero-brain {
-  width: min(440px, 82%); aspect-ratio: 1 / 1; margin: 56px auto 0;
-  border-radius: 50%;
+.hero-brain-wrap {
+  width: min(480px, 88%); margin: 52px auto 0;
+  background: #2b2e30;              /* dark gray backdrop */
+  border-radius: 26px; overflow: hidden;
+  box-shadow: 0 24px 60px rgba(20, 24, 26, 0.28);
+}
+.hero-brain-img {
+  width: 100%; display: block;
+  /* Drop the image's near-black background so the brain sits on the gray. */
+  mix-blend-mode: lighten;
 }
 
 /* ---------- Data cards (light) ---------- */
