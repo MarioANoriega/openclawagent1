@@ -21,6 +21,9 @@ function Nav() {
       <div className="container nav-inner">
         <Logo />
         <div className="nav-right">
+          <Link href="/login" className="btn btn-outline btn-sm">
+            Log in
+          </Link>
           <Link href="/dashboard" className="btn btn-dark btn-sm">
             Run first scan
           </Link>
