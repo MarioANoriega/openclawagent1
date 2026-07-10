@@ -16,6 +16,9 @@
   --code-bg: #232d30;
   --orange: #cf7a43;
   --green: #6fae5f;
+  --accent: #cf7a43;      /* prominent color for highlights (neural score) */
+  --text-faint: #9aa3aa;  /* secondary text */
+  --hesitation: #c76c54;  /* error/warning color */
   --radius: 18px;
   --radius-lg: 26px;
   --maxw: 1080px;
@@ -110,6 +113,10 @@ h3 { font-size: clamp(26px, 4vw, 36px); letter-spacing: -0.03em; margin: 0 0 14p
 }
 
 /* ---------- Data cards (light) ---------- */
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  padding: 20px;
+}
 .dcard {
   background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
   padding: 22px 24px;
@@ -262,7 +269,6 @@ footer { border-top: 1px solid var(--line); padding: 70px 0 0; }
 .stat { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
 .stat .n { font-size: 34px; font-weight: 300; letter-spacing: -0.03em; }
 .stat .l { font-size: 13px; color: var(--faint); margin-top: 4px; }
-.chip { font-family: var(--mono); font-size: 12px; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); }
 .status-queued { color: #c08a2a; } .status-processing { color: #3a7ca5; }
 .status-completed { color: var(--green); } .status-failed { color: #c0392b; }
 .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; }
@@ -308,9 +314,6 @@ footer { border-top: 1px solid var(--line); padding: 70px 0 0; }
 .auth-switch a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .auth-legal { margin-top: 18px; font-size: 12.5px; color: var(--faint); line-height: 1.5; }
 .auth-legal a { text-decoration: underline; text-underline-offset: 2px; }
-.auth-note {
-  margin-top: 16px; font-family: var(--mono); font-size: 11.5px; color: var(--green);
-}
 
 /* ---------- Legal pages ---------- */
 .legal-body h2 {
