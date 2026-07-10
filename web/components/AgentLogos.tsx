@@ -22,27 +22,27 @@ export function OpenAILogo() {
 }
 
 export function CursorLogo() {
-  // Isometric cube: solid top face, shaded right and left faces.
+  // Solid hexagon with a white pointer triangle cut out of the front face.
   return (
     <svg width={SIZE} height={SIZE} viewBox="0 0 24 24" aria-label="Cursor">
-      <polygon points="12,1.5 22,7 12,12.5 2,7" fill={INK} />
-      <polygon points="22,7 22,17 12,22.5 12,12.5" fill={INK} opacity="0.72" />
-      <polygon points="2,7 12,12.5 12,22.5 2,17" fill={INK} opacity="0.45" />
+      <polygon points="12,1.8 21,7.05 21,16.95 12,22.2 3,16.95 3,7.05" fill={INK} />
+      <polygon points="4.4,8.1 17.2,10.2 12.1,21.3" fill="#fff" />
     </svg>
   );
 }
 
 export function WindsurfLogo() {
-  // Angular "W" wave mark: three slanted strokes stepping down to the right.
+  // Continuous thick wave "w": rounded bottoms, squared flag at the top right.
   return (
     <svg width={SIZE} height={SIZE} viewBox="0 0 24 24" aria-label="Windsurf">
-      <g stroke={INK} strokeWidth="2.6" strokeLinecap="round" fill="none">
-        <path d="M2.5 6.5 L8 17.5" />
-        <path d="M8 17.5 L13 8.5" />
-        <path d="M13 8.5 L17.5 15.5" />
-        <path d="M17.5 15.5 L21.5 9" />
-      </g>
-      <circle cx="21.5" cy="6.2" r="1.5" fill={INK} />
+      <path
+        d="M2.2 6.2 C2.2 8 2.7 9.2 3.5 10.6 L5.7 14.5 C6.35 15.65 7.55 15.65 8.2 14.5 L11.1 9.4 C11.75 8.25 12.95 8.25 13.6 9.4 L15.8 13.3 C16.45 14.45 17.65 14.45 18.3 13.3 L20 10.3 C20.4 9.6 20.8 9.2 21.6 9.1"
+        fill="none"
+        stroke={INK}
+        strokeWidth="2.8"
+        strokeLinecap="round"
+      />
+      <rect x="19.6" y="5.3" width="2.9" height="2.9" fill={INK} />
     </svg>
   );
 }
